@@ -1,8 +1,11 @@
 import React from 'react'
+import Hero from './Components/Hero';
 
 const App = () => {
   return (
-    <div className='text-red-500'>Hey i cracked it</div>
+    <div className='bg-black'>
+      <Hero />
+    </div>
   )
 }
 
