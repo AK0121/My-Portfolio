@@ -7,7 +7,8 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
       },
       colors: {
-        buttonBorder: "#4488D9",
+        skyBlue: "#4488D9",
+        brightOrange: "#F97F2B",
       },
       lineHeight: {
         0: "0%",

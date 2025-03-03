@@ -8,6 +8,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+
 gsap.registerPlugin(useGSAP);
 
 const Hero = () => {
@@ -57,28 +58,28 @@ const Hero = () => {
 
       {/* Main content */}
       <main className="absolute pt-52 lg:pt-52 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center gap-14 lg:gap-10">
-        <div ref={rocketRef} className="absolute right-72 lg:-left-5 top-24 lg:top-32">
+        <div ref={rocketRef} className="absolute top-16 left-0 lg:top-32 lg:left-16 xl:left-20">
           <img
             className="w-14 lg:w-20 pt-28 lg:pt-0"
             src={rocketImg}
             alt="Rocket"
           />
         </div>
-        <h1 className="heading text-buttonBorder text-center text-4xl lg:text-5xl font-montserrat font-bold leading-snug lg:tracking-wider">
+        <h1 className="heading text-skyBlue text-center text-2xl md:text-3xl lg:text-5xl font-montserrat font-bold leading-snug lg:tracking-wider">
           AKcelerate Your Business Growth - Fast
         </h1>
 
-        <h2 className="subheading lg:text-center text-justify sm:text-justify sm:w-full text-xl text-balance leading-snug font-montserrat italic font-medium">
+        <h2 className="subheading lg:text-center text-justify sm:text-justify sm:w-full text-xl leading-snug font-montserrat lg:italic font-medium md:text-base sm:text-sm">
           Designing | Developing high-converting landing pages and Facebook ads
-          that deliver results - no fluff, no delays.
+          that deliver real results .
         </h2>
-        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-[#de6c33] text-black transition-all duration-200 ease-out group">
+        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group">
           {/* Background overlay that expands on hover */}
-          <span className="absolute inset-0 bg-buttonBorder w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
+          <span className="absolute inset-0 bg-skyBlue w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
           {/* Text and arrow with higher z-index */}
-          <span className="relative z-10 transition-none group-hover:text-white">
-            Order Your Landing Page
+          <span className="relative z-10 transition-none">
+          See Our Work
           </span>
 
           <FaArrowRight className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:text-white" />
@@ -88,7 +89,7 @@ const Hero = () => {
       {/* Location icon + info box (Always visible) */}
       <div className="flex flex-col items-center lg:items-start absolute left-1/2 lg:left-0 bottom-20 lg:bottom-14 transform -translate-x-1/2 lg:translate-x-0">
         {/* Location Box (Always visible) */}
-        <div className="relative bg-black/5 backdrop-blur-xl py-8 px-24 lg:p-8 rounded-full lg:rounded-tr-full lg:rounded-br-full border border-white/10 overflow-hidden">
+        <div className="relative bg-black/5 backdrop-blur-xl py-8 px-24 lg:p-8 lg:rounded-tr-full lg:rounded-br-full border border-white/10 overflow-hidden">
           {/* Rotating background icon */}
           <div
             ref={svgRef}
@@ -133,15 +134,15 @@ const Hero = () => {
         onClick={handleScrollClick}
         className="hidden lg:flex flex-col items-center absolute right-10 bottom-28 cursor-pointer group"
       >
-        <div className="relative bg-black/5 backdrop-blur-xl p-6 rounded-full border border-white/10 overflow-hidden mb-3 transition-all duration-300 group-hover:bg-[#de6c33]/20">
+        <div className="relative bg-black/5 backdrop-blur-xl p-6 rounded-full border border-white/10 overflow-hidden mb-3 transition-all duration-300 group-hover:bg-brightOrange/20">
           <BsChevronDown 
             size={24} 
-            className="text-white transition-all duration-300 group-hover:text-buttonBorder" 
+            className="text-white transition-all duration-300 group-hover:text-skyBlue" 
           />
         </div>
         <div className="flex flex-col items-center">
           <div className="h-16 w-px bg-gradient-to-b from-white/40 to-transparent"></div>
-          <p className="text-white/70 font-montserrat font-medium tracking-widest text-sm rotate-90 origin-left translate-y-4 transform transition-all duration-300 group-hover:text-buttonBorder">
+          <p className="text-white/70 font-montserrat font-medium tracking-widest text-sm rotate-90 origin-left translate-y-4 transform transition-all duration-300 group-hover:text-skyBlue">
             SCROLL
           </p>
         </div>
