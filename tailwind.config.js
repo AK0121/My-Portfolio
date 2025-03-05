@@ -21,6 +21,7 @@ export default {
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
+        michroma: ["Michroma", "system-ui"],
       },
       colors: {
         skyBlue: "#4488D9",

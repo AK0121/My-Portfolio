@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PiUserSound } from "react-icons/pi";
 import { PiRocketLaunchThin } from "react-icons/pi";
 
@@ -11,13 +11,16 @@ import CampaignImg from "/Assets/Images/campaign-management.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/gsap-core";
+import scrollTrigger from "gsap/ScrollTrigger";
 
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, scrollTrigger);
 
 const ServicesPage = () => {
   const canvasRef = useRef(null);
   const textRef = useRef([]);
+  const servicesRef = useRef([]);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -37,7 +40,7 @@ const ServicesPage = () => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.5,
-        speedX: (Math.random() - 0.5) * speed,
+        speedX: (Math.random() - 0.2) * speed,
         speedY: Math.random() * speed,
       });
     }
@@ -48,14 +51,24 @@ const ServicesPage = () => {
 
       // Draw stars
       stars.forEach((star) => {
+        ctx.save();
+        ctx.translate(star.x, star.y);
+        ctx.rotate(Math.PI / 4);
+
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.moveTo(0, -star.radius * 0.5);
+        ctx.lineTo(star.radius * 0.5, star.radius * 0.5);
+        ctx.lineTo(0, star.radius * 0.5);
+        ctx.lineTo(-star.radius * 0.5, star.radius * 0.5);
+        ctx.closePath();
         ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
         ctx.fill();
 
+        ctx.restore();
+
         // Update position - slight movement to right to create directional flow
-        star.x += star.speedX;
-        star.y -= star.speedY;
+        star.x += star.speedX * 10;
+        star.y -= star.speedY * 10;
 
         // If star moves off screen, reset it
         if (star.x < 0) star.x = canvas.width;
@@ -95,33 +108,46 @@ const ServicesPage = () => {
     }, []);
 
 
+    
+
+
   return (
-    <div className="relative bg-gradient-to-b from-black via-[#112458] to-[#04081b] min-h-screen text-white pt-28 pb-16 overflow-hidden">
+    <div
+      className="relative bg-gradient-to-b from-[#082E51] via-[#112458] to-[#04081b] min-h-screen text-white pb-16 overflow-hidden"
+      style={{
+        backgroundAttachment: "fixed",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+
       {/* Moving stars canvas */}
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full z-0"
-        style={{ opacity: 0.7 }}
+        style={{ opacity: 1 }}
       />
 
       {/* Continuously moving text */}
-      <div className="relative overflow-hidden mb-16">
+      <div className="relative overflow-hidden flex items-center h-96 bg-black/65 backdrop:shadow-2xl">
         <div className="whitespace-nowrap w-11/12 mx-auto">
-          <h1 ref={textRef} className="text-[4rem] md:text-[8rem] lg:text-[14rem] font-bold font-montserrat">
+          <h1 ref={textRef} className="text-[10rem] md:text-[12rem] lg:text-[14rem] font-extrabold font-montserrat">
           <span className="text-brightOrange">Boost</span> Your Online Presence -
             <span className="text-skyBlue">Accelerate</span> Your Growth.
           </h1>
-        </div>
+        </div> 
       </div>
 
       <div className="container mx-auto w-11/12 md:w-5/6 xl:w-11/12 text-center relative z-20 my-20">
-        <p className="text-xl lg:text-4xl mb-20 font-montserrat font-semibold">
-          Your one-stop solution for all your online needs. From design to
-          development, we've got you covered.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-montserrat font-extrabold leading-snug my-20">
+          Get professional <span className="text-brightOrange font-bold">web services</span> from design to development.
+        </h1>
+        <h3 className="text-xl mb-10 font-montserrat">
+          We offer a range of services to help you take your online presence to the next level.
+        </h3>
+        <div ref={servicesRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Service 1 */}
-          <div className="p-6 bg-gray-900 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <img className="mx-auto w-56" src={sitePlanImg} alt="" />
             <h3 className="text-2xl font-semibold mb-2 pt-10 font-montserrat">
               Site Planning
@@ -130,9 +156,16 @@ const ServicesPage = () => {
               We create wireframes, site maps, and user flows to bring your
               vision to life.
             </p>
+            <button
+              className="text-brightOrange pt-5 font-bold transition-all duration-300 hover:text-skyBlue"
+              onClick={() => setShowContent(!showContent)}
+            >
+              {showContent ? "Read Less" : "Read More"}
+
+            </button>
           </div>
           {/* Service 2 */}
-          <div className="p-6 bg-gray-900 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <img className="mx-auto w-48" src={siteDesignImg} alt="" />
             <h3 className="text-2xl font-semibold mt-6 mb-2 font-montserrat">
               Custom Design
@@ -143,7 +176,7 @@ const ServicesPage = () => {
             </p>
           </div>
           {/* Service 3 */}
-          <div className="p-6 bg-gray-900 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <img className="mx-auto w-56" src={siteDevelopmentImg} alt="" />
             <h3 className="text-2xl font-semibold mb-2 pt-10 font-montserrat">
               Development
@@ -174,18 +207,19 @@ const ServicesPage = () => {
       <div className="container mx-auto w-11/12 md:w-5/6 xl:w-11/12 pt-10 text-center relative z-20">
         <h2 className="text-6xl md:text-8xl lg:text-10xl font-extrabold mb-6 mt-12 font-montserrat">
           Drive Results with High-Converting{" "}
+          <br />
           <span className="text-blue-500 text-7xl md:text-9xl lg:text-11xl">
             Facebook Ads
           </span>
           .
         </h2>
-        <p className="text-xl mb-10 font-montserrat">
+        <h3 className="text-xl mb-10 font-montserrat">
           We create and manage ad campaigns that deliver real ROI – no
           guesswork, just results.
-        </p>
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Service 1 */}
-          <div className="p-6 bg-gray-900 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <img className="mx-auto w-56" src={AdCreationImg} alt="" />
             <h3 className="text-2xl font-semibold mt-6 mb-2 font-montserrat">
               Ad Creation
@@ -196,7 +230,7 @@ const ServicesPage = () => {
             </p>
           </div>
           {/* Service 2 */}
-          <div className="p-6 bg-gray-900 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <h3 className="text-2xl font-semibold mb-2 font-montserrat">
               Campaign Management
             </h3>
@@ -206,7 +240,7 @@ const ServicesPage = () => {
             <img className="mx-auto w-56" src={AnalyitcsImg} alt="" />
           </div>
           {/* Service 3 */}
-          <div className="p-6 bg-gray-900 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
             <img className="mx-auto w-56" src={CampaignImg} alt="" />
             <h3 className="text-2xl font-semibold mt-16 mb-2 font-montserrat">
               Analytics & Optimization
@@ -217,7 +251,7 @@ const ServicesPage = () => {
             </p>
           </div>
         </div>
-        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-skyBlue text-white transition-all duration-200 ease-out group my-16 mx-auto">
+        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-skyBlue text-white transition-all duration-200 ease-out group my-20 mx-auto">
           {/* Background overlay that expands on hover */}
           <span className="absolute inset-0 bg-brightOrange w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
@@ -228,7 +262,7 @@ const ServicesPage = () => {
 
           <PiUserSound
             size={20}
-            className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:scale-125"
+            className="relative z-10 self-center transition-transform duration-100 ease-out group-hover:scale-125"
           />
         </button>
       </div>

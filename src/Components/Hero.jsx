@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import Navbar from "./Navbar";
 import rocketImg from "/Assets/Images/rocket.svg";
 import { FaArrowRight } from "react-icons/fa";
@@ -6,20 +6,15 @@ import { IoLocationOutline } from "react-icons/io5";
 import { PiCirclesFourLight } from "react-icons/pi";
 import { BsChevronDown } from "react-icons/bs";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap"
 
-
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 const Hero = () => {
   
   const svgRef = useRef(null);
   const rocketRef = useRef(null);
   const scrollRef = useRef(null);
-
-  const pageRef = useRef(null);
 
   useGSAP(() => {
     gsap.to(scrollRef.current, {
@@ -51,37 +46,15 @@ const Hero = () => {
     });
   }, []);
 
-  useGSAP(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    if (mq.matches) {
-      gsap.set(pageRef.current, {
-        clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-      })
-
-      gsap.from(pageRef.current, {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        ease: "power1.inOut",
-        scrollTrigger: {
-          trigger: pageRef.current,
-          start: "center center",
-          end: "bottom center",
-          scrub: 1,
-          smoothChildTiming: true,
-        }
-      })
-    }
-  })
-
   return (
     <section
-    ref={pageRef}
       className="h-dvh w-full text-white relative "
       style={{
         backgroundImage: "linear-gradient(135deg, #000, #032B44)"
       }}
     >
-      {/* <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-md">
-      </div> */}
+      <div className="absolute inset-0 bg-blue-900 bg-opacity-20 backdrop-blur-md">
+      </div>
       <Navbar />
 
       {/* Main content */}
