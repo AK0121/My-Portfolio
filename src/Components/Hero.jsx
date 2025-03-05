@@ -7,22 +7,29 @@ import { PiCirclesFourLight } from "react-icons/pi";
 import { BsChevronDown } from "react-icons/bs";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 
-gsap.registerPlugin(useGSAP);
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Hero = () => {
+  
   const svgRef = useRef(null);
   const rocketRef = useRef(null);
   const scrollRef = useRef(null);
 
-  const handleScrollClick = () => {
-    // Scroll to the next section smoothly
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
+  const pageRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.to(scrollRef.current, {
+    y: "-=15px",
+    yoyo: true,
+    repeat: -1,
+    duration: 0.5,
+    ease: "power1.inOut",
     });
-  };
+  })
 
   useGSAP(() => {
     // Set the initial position (diagonal, near text)
@@ -43,17 +50,38 @@ const Hero = () => {
       ease: "power1.inOut",
     });
   }, []);
-  
+
+  useGSAP(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    if (mq.matches) {
+      gsap.set(pageRef.current, {
+        clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+      })
+
+      gsap.from(pageRef.current, {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: pageRef.current,
+          start: "center center",
+          end: "bottom center",
+          scrub: 1,
+          smoothChildTiming: true,
+        }
+      })
+    }
+  })
 
   return (
     <section
-      className="h-screen max-h-screen w-full text-white relative"
+    ref={pageRef}
+      className="h-dvh w-full text-white relative "
       style={{
-        backgroundImage: "linear-gradient(135deg, #1a1a1a, #003366)",
+        backgroundImage: "linear-gradient(135deg, #000, #032B44)"
       }}
     >
-      <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-md">
-      </div>
+      {/* <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-md">
+      </div> */}
       <Navbar />
 
       {/* Main content */}
@@ -65,11 +93,11 @@ const Hero = () => {
             alt="Rocket"
           />
         </div>
-        <h1 className="heading text-skyBlue text-center text-2xl md:text-3xl lg:text-5xl font-montserrat font-bold leading-snug lg:tracking-wider">
-          AKcelerate Your Business Growth - Fast
+        <h1 className="heading text-white text-center text-2xl md:text-3xl lg:text-5xl font-montserrat font-bold leading-snug lg:tracking-wider">
+         <span className="text-skyBlue text-6xl font-extrabold">AKcelerate</span> Your Business Growth - <span className="text-brightOrange text-5xl font-extrabold">Fast</span> 
         </h1>
 
-        <h2 className="subheading lg:text-center text-justify sm:text-justify sm:w-full text-xl leading-snug font-montserrat lg:italic font-medium md:text-base sm:text-sm">
+        <h2 className="subheading lg:text-center text-justify sm:text-justify sm:w-full text-xl leading-snug font-montserrat font-medium md:text-base sm:text-sm">
           Designing | Developing high-converting landing pages and Facebook ads
           that deliver real results .
         </h2>
@@ -87,9 +115,9 @@ const Hero = () => {
       </main>
 
       {/* Location icon + info box (Always visible) */}
-      <div className="flex flex-col items-center lg:items-start absolute left-1/2 lg:left-0 bottom-20 lg:bottom-14 transform -translate-x-1/2 lg:translate-x-0">
+      <div className="hidden lg:flex flex-col items-center lg:items-start absolute left-1/2 lg:left-0 bottom-20 lg:bottom-14 transform -translate-x-1/2 lg:translate-x-0">
         {/* Location Box (Always visible) */}
-        <div className="relative bg-black/5 backdrop-blur-xl py-8 px-24 lg:p-8 lg:rounded-tr-full lg:rounded-br-full border border-white/10 overflow-hidden">
+        <div className="relative lg:bg-black/5 bg-white/5 backdrop-blur-xl py-8 px-24 lg:p-8 lg:rounded-tr-full lg:rounded-br-full border border-white/10 overflow-hidden">
           {/* Rotating background icon */}
           <div
             ref={svgRef}
@@ -131,10 +159,9 @@ const Hero = () => {
       {/* Scroll indicator (right side) */}
       <div 
         ref={scrollRef}
-        onClick={handleScrollClick}
-        className="hidden lg:flex flex-col items-center absolute right-10 bottom-28 cursor-pointer group"
+        className="flex flex-col items-center absolute lg:right-10 right-3 lg:bottom-28 bottom-24 group"
       >
-        <div className="relative bg-black/5 backdrop-blur-xl p-6 rounded-full border border-white/10 overflow-hidden mb-3 transition-all duration-300 group-hover:bg-brightOrange/20">
+        <div className="relative bg-white/30 backdrop-blur-xl p-3 lg:p-6 mg:6 rounded-full border border-white/10 overflow-hidden mb-3 transition-all duration-300 group-hover:bg-brightOrange/20">
           <BsChevronDown 
             size={24} 
             className="text-white transition-all duration-300 group-hover:text-skyBlue" 

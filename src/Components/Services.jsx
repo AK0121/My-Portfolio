@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { FaArrowRight } from "react-icons/fa";
 import { PiUserSound } from "react-icons/pi";
 import { PiRocketLaunchThin } from "react-icons/pi";
 
@@ -10,8 +9,15 @@ import AdCreationImg from "/Assets/Images/Ad-creation.svg";
 import AnalyitcsImg from "/Assets/Images/analytics.svg";
 import CampaignImg from "/Assets/Images/campaign-management.svg";
 
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap/gsap-core";
+
+
+gsap.registerPlugin(useGSAP);
+
 const ServicesPage = () => {
   const canvasRef = useRef(null);
+  const textRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -76,8 +82,21 @@ const ServicesPage = () => {
     };
   }, []);
 
+    useGSAP(() => {
+      const text = textRef.current;
+
+      gsap.to(text, {
+        x: () => -(text.scrollWidth - window.innerWidth),
+        ease: "linear",
+        duration: 15,
+        repeat: -1,
+        yoyo: true,
+      });
+    }, []);
+
+
   return (
-    <div className="relative bg-gradient-to-b from-[#042546] via-[#112458] to-[#04081b] min-h-screen text-white pt-28 pb-16 overflow-hidden">
+    <div className="relative bg-gradient-to-b from-black via-[#112458] to-[#04081b] min-h-screen text-white pt-28 pb-16 overflow-hidden">
       {/* Moving stars canvas */}
       <canvas
         ref={canvasRef}
@@ -85,15 +104,20 @@ const ServicesPage = () => {
         style={{ opacity: 0.7 }}
       />
 
-      {/* Section 1: Landing Pages & Website Development */}
-      <div className="container mx-auto w-11/12 md:w-5/6 xl:w-11/12 text-center mb-16 relative z-20">
-        <h2 className="text-4xl font-bold mb-7 font-montserrat">
-          From Blurry Ideas to Reality –{" "}
-          <span className="text-orange-500">Fast</span>.
-        </h2>
-        <p className="text-xl mb-10 font-montserrat">
-          We handle everything from planning to development, so you don't have
-          to lift a finger.
+      {/* Continuously moving text */}
+      <div className="relative overflow-hidden mb-16">
+        <div className="whitespace-nowrap w-11/12 mx-auto">
+          <h1 ref={textRef} className="text-[4rem] md:text-[8rem] lg:text-[14rem] font-bold font-montserrat">
+          <span className="text-brightOrange">Boost</span> Your Online Presence -
+            <span className="text-skyBlue">Accelerate</span> Your Growth.
+          </h1>
+        </div>
+      </div>
+
+      <div className="container mx-auto w-11/12 md:w-5/6 xl:w-11/12 text-center relative z-20 my-20">
+        <p className="text-xl lg:text-4xl mb-20 font-montserrat font-semibold">
+          Your one-stop solution for all your online needs. From design to
+          development, we've got you covered.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Service 1 */}
@@ -130,7 +154,7 @@ const ServicesPage = () => {
             </p>
           </div>
         </div>
-        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group my-16 mx-auto">
+        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group my-24 mx-auto">
           {/* Background overlay that expands on hover */}
           <span className="absolute inset-0 bg-skyBlue w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
@@ -139,15 +163,21 @@ const ServicesPage = () => {
             Get Your Landing Page
           </span>
 
-          <PiRocketLaunchThin size={30} className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:scale-75" />
+          <PiRocketLaunchThin
+            size={30}
+            className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:scale-75"
+          />
         </button>
       </div>
 
       {/* Section 2: Facebook Ads & Digital Marketing */}
       <div className="container mx-auto w-11/12 md:w-5/6 xl:w-11/12 pt-10 text-center relative z-20">
-        <h2 className="text-4xl font-bold mb-6 font-montserrat">
+        <h2 className="text-6xl md:text-8xl lg:text-10xl font-extrabold mb-6 mt-12 font-montserrat">
           Drive Results with High-Converting{" "}
-          <span className="text-blue-500">Facebook Ads</span>.
+          <span className="text-blue-500 text-7xl md:text-9xl lg:text-11xl">
+            Facebook Ads
+          </span>
+          .
         </h2>
         <p className="text-xl mb-10 font-montserrat">
           We create and manage ad campaigns that deliver real ROI – no
@@ -196,7 +226,10 @@ const ServicesPage = () => {
             Start Your Ad Campaign
           </span>
 
-          <PiUserSound size={20} className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:scale-125" />
+          <PiUserSound
+            size={20}
+            className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:scale-125"
+          />
         </button>
       </div>
     </div>
