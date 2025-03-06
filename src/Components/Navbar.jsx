@@ -95,9 +95,9 @@ const Navbar = () => {
       <nav className="lg:hidden flex">
         <button
           ref={menuRef}
-          className="mr-4 mt-2 w-16 h-16 md:w-20 md:h-20 flex z-50 bg-white border-buttonBorder transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
+          className="mr-4 mt-2 w-16 h-16 md:w-20 md:h-20 flex z-50 bg-white border-skyBlue transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
           onClick={(e) => {
-            e.currentTarget.classList.toggle("bg-buttonBorder");
+            e.currentTarget.classList.toggle("bg-skyBlue");
             e.currentTarget.classList.toggle("scale-110");
             setIsOpen(!isOpen);
           }}

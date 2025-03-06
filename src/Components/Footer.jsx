@@ -1,0 +1,87 @@
+import React from "react";
+import globeImg from "/Assets/Images/globe.svg";
+import { IoCall } from "react-icons/io5";
+import { IoMdMail } from "react-icons/io";
+import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
+const Footer = () => {
+  return (
+    <div className="h-screen min-h-max w-full bg-[#6654F1]">
+      <div className="w-11/12 mx-auto max-w-7xl upper-section flex flex-col lg:flex-row md:flex-row items-center">
+        <div className="globeImg lg:w-1/2 md:w-1/2 w-full h-96">
+          <img className="h-full w-full" src={globeImg} alt="" />
+        </div>
+
+        <div className="text-section lg:w-1/2 md:w-1/2 w-5/6 mx-auto text-center lg:text-left line-height:2">
+          <h1 className="text-white font-montserrat font-extrabold text-7xl lg:text-8xl">
+            Let&rsquo;s Work
+          </h1>
+          <h1 className="text-white font-montserrat font-extrabold text-7xl lg:text-8xl ">
+            together
+          </h1>
+        </div>
+      </div>
+
+      <div
+        className="border-b border-gray-300 border-opacity-50 my-14 md:my-20 w-10/12 mx-auto"
+        style={{ borderWidth: "0.5px" }}
+      ></div>
+
+      <div className="lower-section">
+        <div className="flex flex-col md:flex-row lg:flex-row md:justify-center md:gap-8 items-center">
+          <a
+            className="bg-[rgba(0,0,0,0.5)] backdrop-blur-2xl rounded-md px-10 py-4 shadow-md hover:bg-[rgba(0,0,0,0.3)] hover:backdrop-blur-3xl hover:shadow-2xl transition-all duration-300"
+            href="mailto:akcelerate@gmail.com"
+          >
+            <div className="flex items-center justify-center gap-3">
+              <IoMdMail className="text-white text-lg md:text-xl" />
+              <span className="text-white text-lg">akcelerate@gmail.com</span>
+            </div>
+          </a>
+          <a
+            className="bg-[rgba(0,0,0,0.2)] backdrop-blur-2xl rounded-md px-10 py-4 shadow-md transition-all duration-300 mt-8 md:mt-0 hover:bg-[rgba(0,0,0,0.4)] hover:backdrop-blur-3xl hover:shadow-2xl"
+            href="tel:+91 9876543210"
+          >
+            <div className="flex items-center justify-center gap-3">
+              <IoCall className="text-white text-lg md:text-xl" />
+              <span className="text-white text-lg">+91 9876543210</span>
+            </div>
+          </a>
+        </div>
+        <div className="footer-end max-w-7xl mx-auto pt-16 pb-5 md:py-2 md:pt-20 md:pl-4 font-montserrat flex justify-between items-center md:flex-row lg:flex-row flex-col gap-4">
+          <h1 className="copyright text-white text-xl md:text-2xl font-montserrat font-bold md:text-left text-center">
+            2025 &copy; Edition
+          </h1>
+          <div className="socials flex flex-col md:flex-row lg:flex-row gap-4 items-center justify-center md:justify-end">
+            
+            <ul className="flex gap-6 items-center justify-center md:pr-4">
+              <li>
+                <a href="">
+                  <FaWhatsapp size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <FaXTwitter size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <FaGithub size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <FaLinkedinIn size={30} color="white" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;
