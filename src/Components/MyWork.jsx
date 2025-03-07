@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import projectImg1 from "/Assets/Images/project-1.png";
+import projectImg2 from "/Assets/Images/project-2.png";
+import projectImg3 from "/Assets/Images/project-3.png";
+import projectImg4 from "/Assets/Images/project-4.png";
 import Modal from "react-modal";
 import { AiFillCloseCircle } from "react-icons/ai";
 
@@ -29,24 +32,24 @@ const MyWork = () => {
       id: 2,
       title: "Project 2",
       description: "A description of Project 2.",
-      image: projectImg1, // Replace with actual image
+      image: projectImg2, // Replace with actual image
     },
     {
       id: 3,
       title: "Project 3",
       description: "A description of Project 3.",
-      image: projectImg1, // Replace with actual image
+      image: projectImg3, // Replace with actual image
     },
     {
       id: 4,
       title: "Project 4",
       description: "A description of Project 4.",
-      image: projectImg1, // Replace with actual image
+      image: projectImg4, // Replace with actual image
     },
   ];
 
   return (
-    <div className="w-full bg-black py-20" style={{ backgroundImage: "linear-gradient(to top, #6957F2 0%, #562B7C 52%, #112458 100%)" }}>
+    <div className="w-full bg-[black] py-20" >
       <h1 className="text-white text-[5rem] md:text-[7rem] lg:text-[9rem] max-w-[90rem] mx-auto text-center font-michroma font-extrabold relative">
         <span className="absolute top-0 left-0 text-gray-950">Check Out My Work</span>
         <span className="absolute top-2 left-3">Check Out My Work</span>

@@ -20,7 +20,7 @@ const ServicesPage = () => {
   const canvasRef = useRef(null);
   const textRef = useRef([]);
   const servicesRef = useRef([]);
-  const [showContent, setShowContent] = useState(false);
+  // const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -108,9 +108,6 @@ const ServicesPage = () => {
     }, []);
 
 
-    
-
-
   return (
     <div
       className="relative bg-gradient-to-b from-[#082E51] via-[#112458] to-[#04081b] min-h-screen text-white pb-16 overflow-hidden"
@@ -139,7 +136,7 @@ const ServicesPage = () => {
       </div>
 
       <div className="container mx-auto w-11/12 md:w-5/6 xl:w-11/12 text-center relative z-20 my-20">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-montserrat font-extrabold leading-snug my-20">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-montserrat font-extrabold leading-snug mt-32 mb-10">
           Get professional <span className="text-brightOrange font-bold">web services</span> from design to development.
         </h1>
         <h3 className="text-xl mb-10 font-montserrat">
@@ -156,13 +153,12 @@ const ServicesPage = () => {
               We create wireframes, site maps, and user flows to bring your
               vision to life.
             </p>
-            <button
+            {/* <button
               className="text-brightOrange pt-5 font-bold transition-all duration-300 hover:text-skyBlue"
               onClick={() => setShowContent(!showContent)}
             >
               {showContent ? "Read Less" : "Read More"}
-
-            </button>
+            </button> */}
           </div>
           {/* Service 2 */}
           <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
@@ -187,7 +183,7 @@ const ServicesPage = () => {
             </p>
           </div>
         </div>
-        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group my-24 mx-auto">
+        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group my-14 mx-auto">
           {/* Background overlay that expands on hover */}
           <span className="absolute inset-0 bg-skyBlue w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
@@ -213,7 +209,7 @@ const ServicesPage = () => {
           </span>
           .
         </h2>
-        <h3 className="text-xl mb-10 font-montserrat">
+        <h3 className="text-xl my-10 font-montserrat">
           We create and manage ad campaigns that deliver real ROI – no
           guesswork, just results.
         </h3>
