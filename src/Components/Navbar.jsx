@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "/Assets/Images/logo-white-2.png";
 import navVideo from "/Assets/Videos/navBackgroundVideo.mp4";
 import { CiMenuFries } from "react-icons/ci";
@@ -15,6 +15,8 @@ const Navbar = () => {
   const menuItems = ["Home", "About", "Contact"];
 
   const [isOpen, setIsOpen] = useState(false);
+
+  // const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const menuRef = useRef(null);
   const bgRef = useRef(null);
@@ -59,8 +61,12 @@ const Navbar = () => {
     }
   }, [isOpen]);
 
+
   return (
-    <header className="h-14 w-full flex justify-between lg:justify-around items-center pt-10 relative">
+    <header
+    id="navbar"
+      className="h-14 w-full flex justify-between lg:justify-around items-center pt-10 relative"
+    >
       <div className="logo">
         <img className="w-56 lg:w-64" src={logo} alt="website-logo" />
       </div>
@@ -82,10 +88,12 @@ const Navbar = () => {
                 {item}
               </a>
               <span
-              className={`bg-white w-2 h-2 rounded-full transition-opacity duration-300 ${
-                activeLink === item ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-              }`}
-            ></span>
+                className={`bg-white w-2 h-2 rounded-full transition-opacity duration-300 ${
+                  activeLink === item
+                    ? "opacity-100"
+                    : "opacity-0 group-hover:opacity-100"
+                }`}
+              ></span>
             </li>
           ))}
         </ul>

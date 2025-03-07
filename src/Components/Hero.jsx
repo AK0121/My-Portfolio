@@ -48,7 +48,7 @@ const Hero = () => {
 
   return (
     <section
-      className="h-dvh w-full text-white relative "
+      className="h-dvh min-h-[calc(100vh-10rem)] w-full text-white relative "
       style={{
         backgroundImage: "linear-gradient(135deg, #000, #032B44)"
       }}
@@ -58,23 +58,22 @@ const Hero = () => {
       <Navbar />
 
       {/* Main content */}
-      <main className="absolute pt-52 lg:pt-52 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center gap-14 lg:gap-10">
-        <div ref={rocketRef} className="absolute top-16 left-0 lg:top-32 lg:left-16 xl:left-20">
-          <img
-            className="w-14 lg:w-20 pt-28 lg:pt-0"
-            src={rocketImg}
-            alt="Rocket"
-          />
-        </div>
-        <h1 className="heading text-white text-center text-2xl md:text-3xl lg:text-5xl font-montserrat font-bold leading-snug lg:tracking-wider">
+      <main className="absolute pt-52 lg:pt-52 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center ">
+        <img
+        ref={rocketRef}
+          className="w-14 md:w-20 pt-28 lg:pt-0"
+          src={rocketImg}
+          alt="Rocket"
+        />
+        <h1 className="heading text-white text-center text-2xl md:text-3xl lg:text-5xl font-montserrat pb-10 font-bold leading-snug lg:tracking-wider">
          <span className="text-skyBlue text-6xl font-extrabold">AKcelerate</span> Your Business Growth - <span className="text-brightOrange text-5xl font-extrabold">Fast</span> 
         </h1>
 
-        <h2 className="subheading lg:text-center text-justify sm:text-justify sm:w-full text-xl leading-snug font-montserrat font-medium md:text-base sm:text-sm">
+        <h2 className="subheading lg:text-center text-justify sm:text-justify sm:w-full text-xl leading-snug pb-10 font-montserrat font-medium md:text-base sm:text-sm">
           Designing | Developing high-converting landing pages and Facebook ads
           that deliver real results .
         </h2>
-        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group">
+        <button className="relative z-10 overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group">
           {/* Background overlay that expands on hover */}
           <span className="absolute inset-0 bg-skyBlue w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
@@ -132,12 +131,11 @@ const Hero = () => {
       {/* Scroll indicator (right side) */}
       <div 
         ref={scrollRef}
-        className="flex flex-col items-center absolute lg:right-10 right-3 lg:bottom-28 bottom-24 group"
+        className="flex flex-col items-center absolute lg:right-10 right-0 lg:bottom-28 bottom-24 group z-0 "
       >
-        <div className="relative bg-white/30 backdrop-blur-xl p-3 lg:p-6 mg:6 rounded-full border border-white/10 overflow-hidden mb-3 transition-all duration-300 group-hover:bg-brightOrange/20">
-          <BsChevronDown 
-            size={24} 
-            className="text-white transition-all duration-300 group-hover:text-skyBlue" 
+        <div className="relative bg-white/30 backdrop-blur-xl p-3 lg:p-6 rounded-full border border-white/10 overflow-hidden mb-3 transition-all duration-300 group-hover:bg-brightOrange/20">
+          <BsChevronDown  
+            className="text-white md:w-5 md:h-5 w-1 h-1 transition-all duration-300 group-hover:text-skyBlue" 
           />
         </div>
         <div className="flex flex-col items-center">
