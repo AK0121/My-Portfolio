@@ -19,6 +19,7 @@ gsap.registerPlugin(useGSAP, scrollTrigger);
 const ServicesPage = () => {
   const canvasRef = useRef(null);
   const textRef = useRef([]);
+  const textRef2 = useRef([]);
   const servicesRef = useRef([]);
   // const [showContent, setShowContent] = useState(false);
 
@@ -126,11 +127,11 @@ const ServicesPage = () => {
       />
 
       {/* Continuously moving text */}
-      <div className="relative overflow-hidden flex items-center h-96 bg-black/65 backdrop:shadow-2xl">
+      <div className="relative overflow-hidden flex items-center h-96 bg-[#071A32]/60">
         <div className="whitespace-nowrap w-11/12 mx-auto">
           <h1 ref={textRef} className="text-[10rem] md:text-[12rem] lg:text-[14rem] font-extrabold font-montserrat">
           <span className="text-brightOrange">Boost</span> Your Online Presence -
-            <span className="text-skyBlue">Accelerate</span> Your Growth.
+             <span className="text-skyBlue">Accelerate</span> Your Growth.
           </h1>
         </div> 
       </div>

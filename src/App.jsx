@@ -5,6 +5,7 @@ import MyWork from "./Components/MyWork";
 import Footer from "./Components/Footer";
 import { useState, useRef, useEffect } from "react";
 import MenuButton from "./Components/MenuButton";
+import About from "./Components/About";
 
 const App = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -31,11 +32,12 @@ const App = () => {
       style={{ height: "100vh", overflow: "auto" }}
       className="bg-[#b8b6b6]"
     >
-      <Hero />
+      {/* <Hero />
       <Services />
       <MyWork />
       <Footer />
-      {isMenuVisible && <MenuButton />}
+      {isMenuVisible && <MenuButton />} */}
+      <About />
     </div>
   );
 };

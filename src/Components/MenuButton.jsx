@@ -1,121 +1,123 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import { RiCloseLargeLine } from "react-icons/ri";
-import { useState } from "react";
 import navVideo from "/Assets/Videos/navBackgroundVideo.mp4";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(useGSAP);
+import logoImg from "/Assets/Images/logo-white-2.png";
+import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const MenuButton = () => {
+  // Only two states needed - menu open and hover state
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const menuItems = ["Home", "About", "Contact"];
-  const closeBtnRef = useRef(null);
-  const socialRef = useRef(null);
-  const menuRef = useRef(null);
-  const bgRef = useRef(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline({ paused: true });
-
-    tl.fromTo(
-      bgRef.current,
-      { scaleY: 0, transformOrigin: "top center" },
-      { scaleY: 1, duration: 0.7, ease: "power4.out" }
-    )
-      .fromTo(
-        closeBtnRef.current,
-        { scale: 0, y: -10 },
-        { scale: 1, y: 0, duration: 0.1, ease: "back.out(1.7)" },
-        "-=0.1"
-      )
-      .fromTo(
-        socialRef.current.children,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.7, ease: "power2.out" },
-        "-=0.3"
-      );
-
-    if (isOpen) {
-      tl.play();
-    } else {
-      tl.reverse();
-    }
-  }, [isOpen]);
+  useEffect(() => {})
 
   return (
-    <div>
-      <button
-        ref={menuRef}
-        className={`fixed w-16 h-16 md:w-24 md:h-24 z-50 top-4 right-6 bg-white border-skyBlue hover:bg-skyBlue transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer flex`}
-        onClick={(e) => {
-          e.currentTarget.classList.toggle("bg-skyBlue");
-          e.currentTarget.classList.toggle("scale-110");
-          setIsOpen(!isOpen);
-        }}
-      >
-        <CiMenuFries size={30} className="text-black pointer-events-none" />
-      </button>
-
+    <div className="lg:flex md:flex hidden">
+      {/* Glass Overlay - Only visible on hover or when menu is open */}
       <div
-        className={`fixed top-0 right-0 z-50 transition-all duration-500 ease-out h-screen w-full bg-black bg-opacity-50 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed inset-0 bg-black/80 backdrop-blur-3xl z-40 pointer-events-none transition-opacity duration-300 ${
+          isHovering || isOpen ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="absolute top-0 left-0 w-full h-full z-10">
-          <video
-            ref={bgRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="object-cover w-full h-full"
-          >
-            <source src={navVideo} type="video/mp4" />
-          </video>
+        {/* Logo (always positioned in overlay) */}
+        <div className="absolute left-5 md:left-10 top-3 md:top-6 z-50">
+          <img className="w-72 pointer-events-none" src={logoImg} alt="Logo" />
         </div>
-        <div className="flex flex-col h-full justify-start items-center space-y-12 relative z-20">
+
+        {/* Navigation content - only rendered when menu is open */}
+        {isOpen && (
+          <div className="w-full h-full relative pointer-events-auto">
+            {/* Video Background */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="w-full h-full">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="object-cover w-full h-full"
+                >
+                  <source src={navVideo} type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            {/* Menu Content */}
+            <div className="relative z-20 w-full h-full flex flex-col justify-center items-center">
+              <ul className="flex flex-col space-y-10 text-white text-5xl md:text-7xl font-michroma font-semibold">
+                {menuItems.map((item) => (
+                  <li key={item} className="flex">
+                    <a
+                      href="#"
+                      className="hover:scale-110 transition-all duration-150 px-2 py-2 rounded-lg w-full h-full flex items-center justify-center"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsOpen(false);
+                      }}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Social Links */}
+            <div className="absolute z-20 bottom-28 md:bottom-10 w-full font-montserrat font-bold flex flex-col gap-4 text-2xl">
+            <ul className="flex gap-6 items-center justify-center md:pr-4">
+              <li>
+                <a href="" className="hover:scale-110 transition-all duration-150 cursor-pointer">
+                  <FaWhatsapp size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="" className="hover:scale-110 transition-all duration-150 cursor-pointer">
+                  <FaXTwitter size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="" className="hover:scale-110 transition-all duration-150 cursor-pointer">
+                  <FaGithub size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="" className="hover:scale-110 transition-all duration-150 cursor-pointer">
+                  <FaLinkedinIn size={30} color="white" />
+                </a>
+              </li>
+            </ul>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Toggle Button - Always visible, changes based on state */}
+      <div className="fixed top-4 right-6 z-50">
+        {!isOpen ? (
           <button
-            ref={closeBtnRef}
-            className="absolute top-4 right-6 w-16 h-16 md:w-24 md:h-24 flex z-50 bg-[#4587d7] border-[#131e2b] transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
-            onClick={() => {
-              setIsOpen(false);
-            }}
+            className={`w-16 h-16 md:w-24 md:h-24 bg-white border-skyBlue hover:bg-skyBlue transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer flex group`}
+            onClick={() => setIsOpen(true)}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <CiMenuFries size={30} className="text-black pointer-events-none group-hover:text-white transition-all ease-in-out duration-150" />
+          </button>
+        ) : (
+          <button
+            className="w-16 h-16 md:w-24 md:h-24 flex bg-[#4587d7] border-[#131e2b] transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
+            onClick={() => setIsOpen(false)}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
           >
             <RiCloseLargeLine
               size={30}
               className="text-white pointer-events-none"
             />
           </button>
-          <ul className="flex flex-col space-y-10 text-white text-5xl md:text-7xl pt-20 font-michroma font-semibold">
-            {menuItems.map((item) => (
-              <li key={item} className="flex">
-                <a
-                  href=""
-                  className="hover:scale-110 transition-all duration-150 px-2 py-2 rounded-lg w-full h-full flex items-center justify-center"
-                  onClick={(e) => {
-                    e.currentTarget.parentElement.click();
-                    setIsOpen(false);
-                  }}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div
-            ref={socialRef}
-            className="absolute z-10 bottom-28 md:bottom-10 w-full overflow-y-auto font-montserrat font-bold social links flex flex-col gap-4 text-2xl"
-          >
-            <button className="text-white bg-skyBlue py-2 px-4 rounded-lg w-96 mx-auto">
-              <a href="">Resume</a>
-            </button>
-            <button className="text-white bg-skyBlue py-2 px-4 rounded-lg w-96 mx-auto">
-              Github
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

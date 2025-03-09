@@ -64,8 +64,8 @@ const Navbar = () => {
 
   return (
     <header
-    id="navbar"
-      className="h-14 w-full flex justify-between lg:justify-around items-center pt-10 relative"
+      id="navbar"
+      className="md:h-14 h-28 w-full flex justify-between md:bg-black/0 lg:justify-around items-center md:pt-10 md:relative fixed z-50 sm:fixed bg-gray-950/40 sm:border-none sm:rounded-md"
     >
       <div className="logo">
         <img className="w-56 lg:w-64" src={logo} alt="website-logo" />
@@ -103,7 +103,7 @@ const Navbar = () => {
       <nav className="lg:hidden flex">
         <button
           ref={menuRef}
-          className="mr-4 mt-2 w-16 h-16 md:w-20 md:h-20 flex z-50 bg-white border-skyBlue transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
+          className="mr-4 mt-2 w-16 h-16 md:w-20 md:h-20 flex z-50 bg-white border-skyBlue transition-all ease-in-out duration-150 border-2 md:border-4 justify-center items-center rounded-full cursor-pointer"
           onClick={(e) => {
             e.currentTarget.classList.toggle("bg-skyBlue");
             e.currentTarget.classList.toggle("scale-110");
@@ -133,7 +133,7 @@ const Navbar = () => {
           <div className="flex flex-col">
             <button
               ref={closeBtnRef}
-              className="absolute top-2 right-4 w-20 h-20 flex z-50 bg-[#4587d7] border-[#131e2b] transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
+              className="absolute top-5 right-2 w-20 h-20 flex z-50 bg-[#4587d7] border-[#131e2b] transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
               onClick={() => {
                 setIsOpen(false);
               }}
