@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import globeImg from "/Assets/Images/globe.svg";
 import { IoCall } from "react-icons/io5";
 import { IoMdMail } from "react-icons/io";
@@ -8,17 +8,17 @@ import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
 
   return (
-    <div className="h-screen min-h-max w-full bg-[#000000]">
+    <div className="h-screen min-h-max w-full bg-[#000000] pt-10 pb-2 overflow-hidden">
       <div className="w-11/12 mx-auto max-w-7xl upper-section flex flex-col lg:flex-row md:flex-row items-center">
         <div className="globeImg lg:w-1/2 md:w-1/2 w-full h-96">
           <img className="h-full w-full" src={globeImg} alt="" />
         </div>
 
         <div className="text-section lg:w-1/2 md:w-1/2 w-5/6 mx-auto text-center lg:text-left line-height:2">
-          <h1 className="text-white font-montserrat font-extrabold text-7xl lg:text-8xl">
+          <h1 className="text-white font-montserrat font-extrabold text-6xl md:text-8xl">
             Let&rsquo;s Work
           </h1>
-          <h1 className="text-white font-montserrat font-extrabold text-7xl lg:text-8xl ">
+          <h1 className="text-white font-montserrat font-extrabold text-6xl md:text-8xl ">
             together
           </h1>
         </div>

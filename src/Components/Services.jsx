@@ -127,7 +127,7 @@ const ServicesPage = () => {
       />
 
       {/* Continuously moving text */}
-      <div className="relative overflow-hidden flex items-center h-96 bg-[#071A32]/60">
+      <div className="relative overflow-hidden flex items-center h-96 bg-[#000011]">
         <div className="whitespace-nowrap w-11/12 mx-auto">
           <h1 ref={textRef} className="text-[10rem] md:text-[12rem] lg:text-[14rem] font-extrabold font-montserrat">
           <span className="text-brightOrange">Boost</span> Your Online Presence -
@@ -228,17 +228,17 @@ const ServicesPage = () => {
           </div>
           {/* Service 2 */}
           <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
-            <h3 className="text-2xl font-semibold mb-2 font-montserrat">
+            <img className="mx-auto w-60 pt-8" src={AnalyitcsImg} alt="" />
+            <h3 className="text-2xl font-semibold mt-12 mb-2 font-montserrat">
               Campaign Management
             </h3>
-            <p className="text-gray-300 mt-4 mb-12 font-montserrat">
+            <p className="text-gray-300 mt-4 font-montserrat">
               We run A/B tests and optimize campaigns for maximum performance.
             </p>
-            <img className="mx-auto w-56" src={AnalyitcsImg} alt="" />
           </div>
           {/* Service 3 */}
           <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
-            <img className="mx-auto w-56" src={CampaignImg} alt="" />
+            <img className="mx-auto w-56 pt-7" src={CampaignImg} alt="" />
             <h3 className="text-2xl font-semibold mt-16 mb-2 font-montserrat">
               Analytics & Optimization
             </h3>

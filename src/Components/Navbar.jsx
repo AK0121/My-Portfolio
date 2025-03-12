@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import logo from "/Assets/Images/logo-white-2.png";
-import navVideo from "/Assets/Videos/navBackgroundVideo.mp4";
 import { CiMenuFries } from "react-icons/ci";
-import { useState, useRef } from "react";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -11,165 +11,241 @@ gsap.registerPlugin(useGSAP);
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState("Home");
-
-  const menuItems = ["Home", "About", "Contact"];
-
+  const location = useLocation();
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
   const [isOpen, setIsOpen] = useState(false);
 
-  // const [isMenuVisible, setIsMenuVisible] = useState(false);
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/") setActiveLink("Home");
+    else if (path === "/about") setActiveLink("About");
+    else if (path === "/contact") setActiveLink("Contact");
+  }, [location]);
 
   const menuRef = useRef(null);
-  const bgRef = useRef(null);
+  const videoRef = useRef(null);
+  const overlayRef = useRef(null);
   const linksRef = useRef(null);
-  const closeBtnRef = useRef(null);
   const socialRef = useRef(null);
 
-  // Desktop Navigation Animation
-
-  // Mobile Navigation Animation
+  // GSAP Animation for Mobile Menu
   useGSAP(() => {
-    const tl = gsap.timeline({ paused: true });
+    if (isOpen) {
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play();
+      }
 
-    tl.fromTo(
-      bgRef.current,
-      { scaleY: 0, transformOrigin: "top center" },
-      { scaleY: 1, duration: 0.7, ease: "power4.out" }
-    )
-      .fromTo(
-        linksRef.current.children,
-        { x: 50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.4, ease: "elastic.out(1.2, 0.8)" },
-        "-=0.3"
-      )
-      .fromTo(
-        closeBtnRef.current,
-        { scale: 0, y: -10 },
-        { scale: 1, y: 0, duration: 0.1, ease: "back.out(1.7)" },
-        "-=0.1"
-      )
-      .fromTo(
-        socialRef.current.children,
+      const tl = gsap.timeline();
+
+      // Animate the full-screen menu sliding in from left
+      tl.fromTo(
+        overlayRef.current,
+        { x: "-100%" },
+        {
+          x: "0%",
+          duration: 0.5,
+          ease: "power3.out",
+        }
+      );
+
+      // Simple fade in for grid background
+      tl.fromTo(
+        ".grid-background",
         { opacity: 0 },
-        { opacity: 1, duration: 0.7, ease: "power2.out" },
+        { 
+          opacity: 0.15,
+          duration: 0.3
+        },
         "-=0.3"
       );
 
-    if (isOpen) {
-      tl.play();
-    } else {
-      tl.reverse();
+      // Animate links with a staggered effect - prioritize these animations
+      tl.fromTo(
+        linksRef.current.children,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+        },
+        "-=0.2"
+      );
+
+      // Animate social icons
+      tl.fromTo(
+        socialRef.current.children,
+        { x: -30, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      );
     }
   }, [isOpen]);
 
+  // Close menu animation
+  const closeMenu = () => {
+    gsap.to(overlayRef.current, {
+      x: "-100%",
+      duration: 0.4,
+      ease: "power2.inOut",
+      onComplete: () => setIsOpen(false),
+    });
+  };
 
   return (
-    <header
-      id="navbar"
-      className="md:h-14 h-28 w-full flex justify-between md:bg-black/0 lg:justify-around items-center md:pt-10 md:relative fixed z-50 sm:fixed bg-gray-950/40 sm:border-none sm:rounded-md"
-    >
-      <div className="logo">
-        <img className="w-56 lg:w-64" src={logo} alt="website-logo" />
+    <header className="absolute z-[999] top-4 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[90%] lg:w-[80%] flex justify-between items-center bg-black/40 rounded-full border-[0.3px] border-gray-200/30 py-2 md:py-4 px-4 md:px-8">
+      {/* Logo */}
+      <div className="logo relative overflow-hidden group">
+        <img
+          className="w-32 md:w-40 lg:w-48 transition-all duration-300 group-hover:scale-110"
+          src={logo}
+          alt="website-logo"
+        />
       </div>
 
-      {/* Desktop Menu */}
-      <nav className="h-14 w-[85%] hidden lg:flex xl:w-[60%] justify-end items-center space-x-10 xl:space-x-20 mr-10">
-        <ul className="flex gap-16 text-white text-xl font-montserrat font-semibold">
-          {menuItems.map((item) => (
-            <li
-              key={item}
-              className="flex flex-col items-center pt-5 hover:scale-110 transition-all ease-in-out duration-150"
-              onClick={() => setActiveLink(item)} //Set active link when clicked
-            >
-              <a
-                href=""
-                className="hover:scale-110 transition-all duration-150 px-2 py-2 rounded-lg w-full h-full flex items-center justify-center"
-                onClick={(e) => e.currentTarget.parentElement.click()} //Click parent element when link is clicked
-              >
-                {item}
-              </a>
-              <span
-                className={`bg-white w-2 h-2 rounded-full transition-opacity duration-300 ${
-                  activeLink === item
-                    ? "opacity-100"
-                    : "opacity-0 group-hover:opacity-100"
-                }`}
-              ></span>
-            </li>
-          ))}
-        </ul>
+      {/* Desktop Navigation */}
+      <nav className="h-14 hidden lg:flex justify-end items-center">
+        <div className="bg-black/40 rounded-full px-3 py-1">
+          <ul className="flex gap-2 text-white text-lg font-montserrat font-medium">
+            {menuItems.map((item) => (
+              <li key={item.name} className="relative">
+                <Link
+                  to={item.path}
+                  className={`px-6 py-2 rounded-full transition-all duration-300 flex items-center justify-center ${
+                    activeLink === item.name
+                      ? "bg-gradient-to-r from-blue-600 to-cyan-400 text-white"
+                      : "hover:bg-white/10"
+                  }`}
+                  onClick={() => setActiveLink(item.name)}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <nav className="lg:hidden flex">
+      {/* Mobile Menu Button */}
+      <nav className="lg:hidden flex items-center">
         <button
           ref={menuRef}
-          className="mr-4 mt-2 w-16 h-16 md:w-20 md:h-20 flex z-50 bg-white border-skyBlue transition-all ease-in-out duration-150 border-2 md:border-4 justify-center items-center rounded-full cursor-pointer"
-          onClick={(e) => {
-            e.currentTarget.classList.toggle("bg-skyBlue");
-            e.currentTarget.classList.toggle("scale-110");
-            setIsOpen(!isOpen);
-          }}
+          className="mr-1 mt-1 w-12 h-12 md:w-14 md:h-14 flex z-50 bg-gradient-to-r from-blue-600 to-cyan-500 transition-all ease-in-out duration-150 justify-center items-center rounded-full cursor-pointer shadow-lg shadow-blue-500/20"
+          onClick={() => setIsOpen(true)}
         >
-          <CiMenuFries size={30} className="text-black pointer-events-none" />
+          <CiMenuFries size={24} className="text-white pointer-events-none" />
         </button>
 
+        {/* Full-Screen Mobile Menu */}
         <div
-          className={`fixed inset-0 z-50 transition-all duration-500 ease-out ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          ref={overlayRef}
+          className="fixed top-0 right-0 w-full h-screen z-50 bg-gradient-to-b from-black via-blue-950/95 to-black overflow-hidden"
+          style={{ transform: isOpen ? "translateX(0)" : "translateX(-120%)" }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
-          <video
-            ref={bgRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          >
-            <source src={navVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="flex flex-col">
+          {/* Clean Grid SVG Background */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+            <svg className="grid-background w-full h-full opacity-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+              {/* Perspective Grid Lines */}
+              {/* Horizontal lines */}
+              {Array.from({ length: 12 }).map((_, i) => (
+                <line
+                  key={`h-${i}`}
+                  x1="0"
+                  y1={i * 8}
+                  x2="100"
+                  y2={i * 8}
+                  stroke="url(#grid-gradient)"
+                  strokeWidth="0.15"
+                />
+              ))}
+              {/* Vertical lines */}
+              {Array.from({ length: 12 }).map((_, i) => (
+                <line
+                  key={`v-${i}`}
+                  x1={i * 8}
+                  y1="0"
+                  x2={i * 8}
+                  y2="100"
+                  stroke="url(#grid-gradient)"
+                  strokeWidth="0.15"
+                />
+              ))}
+              
+              {/* Diagonal accent lines (only a few, positioned mostly at edges) */}
+              <line x1="0" y1="100" x2="100" y2="0" stroke="url(#accent-gradient)" strokeWidth="0.2" />
+              <line x1="0" y1="50" x2="50" y2="0" stroke="url(#accent-gradient)" strokeWidth="0.2" />
+              <line x1="50" y1="100" x2="100" y2="50" stroke="url(#accent-gradient)" strokeWidth="0.2" />
+              
+              {/* Gradients definitions */}
+              <defs>
+                <linearGradient id="grid-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#4299e1" stopOpacity="0.1" />
+                  <stop offset="50%" stopColor="#4299e1" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#4299e1" stopOpacity="0.1" />
+                </linearGradient>
+                <linearGradient id="accent-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#00e1ff" stopOpacity="0.1" />
+                  <stop offset="50%" stopColor="#00e1ff" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#00e1ff" stopOpacity="0.1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          {/* Menu Content */}
+          <div className="relative w-full h-full flex flex-col items-center justify-between py-24">
+            {/* Close Button */}
             <button
-              ref={closeBtnRef}
-              className="absolute top-5 right-2 w-20 h-20 flex z-50 bg-[#4587d7] border-[#131e2b] transition-all ease-in-out duration-150 border-4 justify-center items-center rounded-full cursor-pointer"
-              onClick={() => {
-                setIsOpen(false);
-              }}
+              className="absolute top-6 right-6 w-12 h-12 md:w-14 md:h-14 flex z-50 bg-gradient-to-r from-red-500 to-pink-500 justify-center items-center rounded-full cursor-pointer shadow-lg shadow-red-500/20 hover:scale-110 transition-transform duration-200"
+              onClick={closeMenu}
             >
-              <RiCloseLargeLine
-                size={30}
-                className="text-white pointer-events-none"
-              />
+              <RiCloseLargeLine size={24} className="text-white" />
             </button>
 
-            <ul
-              className="absolute z-10 pt-40 w-full overflow-y-auto items-center flex flex-col gap-16 text-5xl md:text-7xl font-montserrat font-bold"
-              ref={linksRef}
-            >
-              <li>
-                <a className="" href="">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-              <li>
-                <a href="">Contact</a>
-              </li>
+            {/* Navigation Links */}
+            <ul ref={linksRef} className="flex flex-col items-center justify-center gap-12 mt-24">
+              {menuItems.map((item) => (
+                <li key={item.name} className="text-center">
+                  <Link
+                    to={item.path}
+                    className="relative text-7xl md:text-6xl font-montserrat font-semibold text-white transition-all duration-300 inline-block"
+                    onClick={() => {
+                      setActiveLink(item.name);
+                      closeMenu();
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            <div
-              ref={socialRef}
-              className="absolute z-10 bottom-10 w-full overflow-y-auto font-montserrat font-bold social links flex flex-col gap-4 text-2xl"
-            >
-              <button className="bg-black/20 border-2 text-white border-gray-400 py-2 px-4 rounded-lg md:w-[70%] w-[90%] mx-auto">
-                <a href="">Resume</a>
-              </button>
-              <button className="bg-black/15 text-white border-2 border-gray-400 py-2 px-4 rounded-md md:w-[70%] w-[90%] mx-auto">
-                Github
-              </button>
+
+            {/* Social Media Icons */}
+            <div ref={socialRef} className="flex justify-center items-center gap-8 mb-12">
+              <a href="#" className="hover:scale-125 transition-transform duration-300">
+                <FaGithub size={28} className="text-white" />
+              </a>
+              <a href="#" className="hover:scale-125 transition-transform duration-300">
+                <FaLinkedin size={28} className="text-white" />
+              </a>
+              <a href="#" className="hover:scale-125 transition-transform duration-300">
+                <FaTwitter size={28} className="text-white" />
+              </a>
+              <a href="#" className="hover:scale-125 transition-transform duration-300">
+                <FaInstagram size={28} className="text-white" />
+              </a>
             </div>
           </div>
         </div>

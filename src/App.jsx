@@ -1,43 +1,30 @@
-import React from "react";
-import Hero from "./Components/Hero";
-import Services from "./Components/Services";
-import MyWork from "./Components/MyWork";
+// App.jsx (modified)
+import React, { useState, useRef, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-import { useState, useRef, useEffect } from "react";
-import MenuButton from "./Components/MenuButton";
 import About from "./Components/About";
+import HomePage from "./Components/HomePage";
 
 const App = () => {
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const scrollContainerRef = useRef(null);
-  const triggerPoint = 150; // Your desired trigger point
+  const location = useLocation();
+  
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = scrollContainerRef.current.scrollTop;
-      setIsMenuVisible(scrollPosition > triggerPoint);
-    };
-
-    const scrollContainer = scrollContainerRef.current;
-    scrollContainer.addEventListener("scroll", handleScroll);
-
-    return () => {
-      scrollContainer.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const currentPath = location.pathname;
 
   return (
     <div
-      ref={scrollContainerRef}
-      style={{ height: "100vh", overflow: "auto" }}
-      className="bg-[#b8b6b6]"
+      className="h-screen w-full overflow-y-auto"
+      style={{
+        backgroundImage: "linear-gradient(to top, #000, #000019)",
+      }}
     >
-      {/* <Hero />
-      <Services />
-      <MyWork />
+      <Navbar currentPath={currentPath} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
       <Footer />
-      {isMenuVisible && <MenuButton />} */}
-      <About />
     </div>
   );
 };
