@@ -19,13 +19,25 @@ const AboutServices = () =>
           boxShadow: "0 0 20px rgba(103, 232, 249, 0.5)",
           duration: 0.3
         });
+        
+        gsap.to(".button-gradient", {
+          x: "100%",
+          duration: 0.8,
+          ease: "sine.inOut"
+        });
       });
-
+      
       buttonRef.current.addEventListener("mouseleave", () => {
         gsap.to(buttonRef.current, {
           scale: 1,
-          boxShadow: "0 0 20px rgba(103, 232, 249, 0.5)",
+          boxShadow: "0 0 0px rgba(103, 232, 249, 0)",
           duration: 0.3
+        });
+        
+        gsap.to(".button-gradient", {
+          x: "-100%",
+          duration: 0.8,
+          ease: "sine.inOut"
         });
       });
     }, []);
@@ -33,9 +45,9 @@ const AboutServices = () =>
   return <div className="md:h-screen min-h-max w-full overflow-hidden text-white font-montserrat bg-[rgb(25,51,54)] py-14">
     <div id="painPointSection" className="flex flex-col gap-16">
         <div className="upperSection flex md:flex-row flex-col justify-center items-center w-8/12 mx-auto md:gap-8 gap-14 pt-10">
-            <img src={pamphlets1Img} className="lg:w-44 w-24 filter invert" alt="pamphlets-image" />
+            <img src={pamphlets1Img} className="lg:w-44 w-52 filter invert" alt="pamphlets-image" />
             <h2 className="lg:text-xl md:text-lg text-sm font-montserrat">In today’s world, businesses are still relying on old-school methods like pamphlets and posters to market themselves. But let’s be honest – how many of those actually get noticed? What you need is a tool that can shout about your business louder than any poster ever could.</h2>
-            <img src={pamphlets2Img} className="lg:w-44 w-24 filter invert" alt="pamphlets-image" />
+            <img src={pamphlets2Img} className="lg:w-44 w-52 filter invert" alt="pamphlets-image" />
         </div>
         <div className="lowerSection w-8/12 mx-auto">
         <p className="text-2xl leading-relaxed font-montserrat">
@@ -55,7 +67,7 @@ const AboutServices = () =>
     <div id="servicesSection" className="flex flex-col gap-8 font-montserrat">
         <h1 className="text-5xl font-bold text-center pb-10 md:pb-0">How we help you grow</h1>
         <div className="content md:w-8/12 w-11/12 mx-auto flex flex-col md:flex-row justify-center items-center">
-        <div className="text-content w-1/2 md:text-2xl text-xl">
+        <div className="text-content lg:w-1/2 md:text-2xl text-xl">
         At AKcelerate, we don’t just create landing pages and run ads. We create tools that help your business grow.
         </div> 
         <div className="image-content w-60 h-60">
@@ -76,7 +88,7 @@ const AboutServices = () =>
           <h3 className="md:w-7/12 w-10/12 mx-auto">Whether you need a stunning landing page or a high-performing ad campaign, we’ve got you covered.</h3>
           <button
             ref={buttonRef}
-            className="mt-8 relative overflow-hidden group bg-skyBlue text-white font-bold py-4 px-8 rounded-md text-lg parallax-2"
+            className="mt-8 w-96 relative overflow-hidden group bg-skyBlue text-white font-bold py-4 px-8 rounded-md text-lg parallax-2"
           >
             <span className="relative z-10">Get Started</span>
             <span
