@@ -8,6 +8,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Link } from "react-router-dom";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -18,7 +19,7 @@ const MyWork = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [modalImageLoaded, setModalImageLoaded] = useState(false);
-  
+
   // Refs for GSAP animations
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
@@ -33,8 +34,6 @@ const MyWork = () => {
       setModalImageLoaded(false);
     }
   }, [isModalOpen]);
-
-
 
   // Animation for modal - only runs when modal is open AND ref exists
   useEffect(() => {
@@ -56,11 +55,11 @@ const MyWork = () => {
     // Only animate if ref exists
     if (modalContentRef.current) {
       gsap.to(modalContentRef.current, {
-        opacity: 0, 
-        scale: 0.95, 
-        duration: 0.2, 
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.2,
         ease: "power2.in",
-        onComplete: () => setIsModalOpen(false)
+        onComplete: () => setIsModalOpen(false),
       });
     } else {
       setIsModalOpen(false);
@@ -71,30 +70,33 @@ const MyWork = () => {
     {
       id: 1,
       title: "Forex Funders",
-      description: "High-speed trading platform with accelerated performance metrics",
+      description:
+        "High-speed trading platform with accelerated performance metrics",
       image: projectImg1,
-      tags: ["Trading", "Performance", "Web App"]
+      tags: ["Trading", "Performance", "Web App"],
     },
     {
       id: 2,
       title: "Growth Dashboard",
-      description: "Analytics platform designed to track and boost marketing acceleration",
+      description:
+        "Analytics platform designed to track and boost marketing acceleration",
       image: projectImg2,
-      tags: ["Analytics", "SaaS", "Dashboard"]
+      tags: ["Analytics", "SaaS", "Dashboard"],
     },
     {
       id: 3,
       title: "Ad Campaign Launcher",
-      description: "Facebook ads specialist platform for rapid campaign scaling",
+      description:
+        "Facebook ads specialist platform for rapid campaign scaling",
       image: projectImg3,
-      tags: ["Facebook Ads", "Marketing", "Growth"]
+      tags: ["Facebook Ads", "Marketing", "Growth"],
     },
     {
       id: 4,
       title: "Velocity Landing Page",
       description: "High-conversion landing page with optimized speed metrics",
       image: projectImg4,
-      tags: ["Landing Page", "Optimization", "Design"]
+      tags: ["Landing Page", "Optimization", "Design"],
     },
   ];
 
@@ -104,37 +106,49 @@ const MyWork = () => {
       gsap.to(`.btn-overlay-${index}`, {
         width: "100%",
         duration: 0.3,
-        ease: "power2.out"
+        ease: "power2.out",
       });
     } else {
       gsap.to(`.btn-overlay-${index}`, {
         width: 0,
         duration: 0.3,
-        ease: "power2.out"
+        ease: "power2.out",
       });
     }
   };
 
   return (
-    <div ref={sectionRef} className="w-full bg-gradient-to-b from-[#070a1c] to-[#000000] py-16 overflow-hidden">
+    <div
+      id="my-work"
+      ref={sectionRef}
+      className="w-full bg-gradient-to-b from-[#070a1c] to-[#000000] py-16 overflow-hidden"
+    >
       {/* Simplified responsive heading */}
       <div ref={titleRef} className="text-center mb-6 px-4">
         <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-skyBlue to-blue-300">
           Accelerated Work
         </h1>
       </div>
-        
+
       {/* Speed-themed subtitle */}
-      <p ref={subtitleRef} className="text-center text-lg md:text-xl text-gray-300 mt-2 max-w-3xl mx-auto font-montserrat px-4">
-        High-velocity web solutions that drive <span className="text-skyBlue font-bold">growth</span> and deliver <span className="text-brightOrange font-bold">results</span>
+      <p
+        ref={subtitleRef}
+        className="text-center text-lg md:text-xl text-gray-300 mt-2 max-w-3xl mx-auto font-montserrat px-4"
+      >
+        High-velocity web solutions that drive{" "}
+        <span className="text-skyBlue font-bold">growth</span> and deliver{" "}
+        <span className="text-brightOrange font-bold">results</span>
       </p>
 
       {/* Project grid with optimized animation */}
-      <div ref={projectsRef} className="project-container max-w-7xl w-[90%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mt-12">
+      <div
+        ref={projectsRef}
+        className="project-container max-w-7xl w-[90%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mt-12"
+      >
         {projects.map((project, index) => (
           <div
             key={project.id}
-            ref={el => (projectRefs.current[index] = el)}
+            ref={(el) => (projectRefs.current[index] = el)}
             className="relative bg-gray-900/40 p-5 rounded-xl transition-all duration-300 ease-in-out shadow-lg border border-gray-800/50 hover:border-skyBlue/50 hover:bg-blue-950/30"
           >
             {/* Project Image with simplified hover effect */}
@@ -157,8 +171,11 @@ const MyWork = () => {
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-4">
-              {project.tags.map(tag => (
-                <span key={tag} className="text-xs bg-skyBlue/20 text-skyBlue px-3 py-1 rounded-full font-montserrat">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs bg-skyBlue/20 text-skyBlue px-3 py-1 rounded-full font-montserrat"
+                >
                   {tag}
                 </span>
               ))}
@@ -176,15 +193,17 @@ const MyWork = () => {
 
             {/* Simplified Button */}
             <div className="flex justify-center mt-5">
-              <button 
+              <button
                 className="relative overflow-hidden flex items-center justify-center w-full sm:w-48 rounded-full px-4 py-3 text-base font-montserrat font-semibold bg-skyBlue text-white transition-all duration-200 ease-out"
                 onMouseEnter={() => handleButtonHover(index, true)}
                 onMouseLeave={() => handleButtonHover(index, false)}
               >
                 <span className="absolute inset-0 flex items-center justify-center">
-                  <span className={`btn-overlay-${index} h-full w-0 bg-brightOrange absolute left-0 top-0`}></span>
+                  <span
+                    className={`btn-overlay-${index} h-full w-0 bg-brightOrange absolute left-0 top-0`}
+                  ></span>
                 </span>
-                
+
                 <span className="relative z-10 transition-colors duration-300">
                   Read the case study
                 </span>
@@ -202,7 +221,10 @@ const MyWork = () => {
         className="fixed inset-0 flex items-center justify-center z-50"
         overlayClassName="fixed inset-0 bg-black/90 backdrop-blur-md z-50"
       >
-        <div ref={modalContentRef} className="relative w-11/12 max-w-4xl mx-auto">
+        <div
+          ref={modalContentRef}
+          className="relative w-11/12 max-w-4xl mx-auto"
+        >
           {/* Close Button */}
           <button
             className="absolute -top-10 -right-2 text-white text-4xl hover:text-red-500 transition-colors z-10"
@@ -223,15 +245,27 @@ const MyWork = () => {
             <img
               src={selectedImage}
               alt="Project Preview"
-              className={`w-full h-auto max-h-[80vh] rounded-lg object-contain transition-opacity duration-300 ${modalImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`w-full h-auto max-h-[80vh] rounded-lg object-contain transition-opacity duration-300 ${
+                modalImageLoaded ? "opacity-100" : "opacity-0"
+              }`}
               onLoad={() => setModalImageLoaded(true)}
             />
           </div>
         </div>
       </Modal>
+      
+      <div className="CTA-button flex justify-center items-center">
+      <Link to="/contact">
+        <button
+          className="bg-skyBlue hover:bg-brightOrange hover:scale-95 text-white font-bold py-4 px-32 rounded-lg text-2xl mt-24
+       transition-all duration-200 ease-in-out"
+        >
+          Get in Touch
+        </button>
+        </Link>
+      </div>
     </div>
   );
 };
 
 export default MyWork;
-

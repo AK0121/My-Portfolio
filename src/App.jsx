@@ -1,16 +1,14 @@
-// App.jsx (modified)
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import About from "./Components/About";
 import HomePage from "./Components/HomePage";
 import Contact from "./Components/Contact";
+import ScrollToTop from "./Components/ScrollToTop";
 
 const App = () => {
   const location = useLocation();
-  
-
   const currentPath = location.pathname;
 
   return (
@@ -21,11 +19,16 @@ const App = () => {
       }}
     >
       <Navbar currentPath={currentPath} />
+      
+      {/* ScrollToTop should be outside of <Routes> */}
+      <ScrollToTop />  
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+
       <Footer />
     </div>
   );

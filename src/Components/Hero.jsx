@@ -1,11 +1,9 @@
 import React, { useRef } from "react";
 import rocketImg from "/Assets/Images/rocket.svg";
 import mockupImage from "/Assets/Images/mock-up.png";
-import landingPageImg from "/Assets/Images/landing-page-mock-up.png";
 import landingPageImg2 from "/Assets/Images/landing-page-mock-up-2.png";
 import { FaArrowRight } from "react-icons/fa";
-// import { IoLocationOutline } from "react-icons/io5";
-// import { PiCirclesFourLight } from "react-icons/pi";
+import {HashLink} from "react-router-hash-link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { PiCirclesFourLight } from "react-icons/pi";
@@ -62,7 +60,8 @@ const Hero = () => {
           Designing | Developing high-converting landing pages and Facebook ads
           that deliver real results .
         </h2>
-        <button className="relative z-10 overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group">
+        <HashLink smooth to="/#my-work">
+        <div className="relative z-10 overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group">
           {/* Background overlay that expands on hover */}
           <span className="absolute inset-0 bg-skyBlue w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
@@ -70,7 +69,8 @@ const Hero = () => {
           <span className="relative z-10 transition-none">See Our Work</span>
 
           <FaArrowRight className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:text-white" />
-        </button>
+        </div>
+        </HashLink>
       </main>
 
       {/* Location Box */}

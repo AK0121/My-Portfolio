@@ -4,6 +4,7 @@ import facebookImg from "/Assets/Images/facebook-ads.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -86,16 +87,18 @@ const AboutServices = () =>
         </div>
         <div className="call-to-action md:w-6/12 w-11/12 mx-auto text-lg flex flex-col justify-center items-center gap-7">
           <h3 className="md:w-7/12 w-10/12 mx-auto">Whether you need a stunning landing page or a high-performing ad campaign, we’ve got you covered.</h3>
-          <button
+          <Link to="/contact">
+          <div
             ref={buttonRef}
-            className="mt-8 w-96 relative overflow-hidden group bg-skyBlue text-white font-bold py-4 px-8 rounded-md text-lg parallax-2"
+            className="mt-8 w-96 relative overflow-hidden group bg-skyBlue text-white font-bold py-4 px-8 rounded-md text-lg text-center"
           >
             <span className="relative z-10">Get Started</span>
             <span
               className="button-gradient absolute inset-0 bg-gradient-to-r from-skyBlue via-brightOrange to-skyBlue z-0"
               style={{ transform: "translateX(-100%)" }}
             />
-          </button>
+          </div>
+          </Link>
         </div>
     </div>
   </div>;

@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import contactImg from "/Assets/Images/contact-page-image.jpg";
 import { MdArrowForward } from "react-icons/md";
-import { FaBolt, FaRocket } from "react-icons/fa";
-import { FiTrendingUp } from "react-icons/fi";
+import { FaBolt } from "react-icons/fa";
 
 const Contact = () => {
   const heroRef = useRef(null);
@@ -39,7 +38,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-[#03060D] font-montserrat text-white">
+    <div id="contact-form" className="w-full min-h-screen bg-[#03060D] font-montserrat text-white">
       {/* Hero Section with Dynamic Elements */}
       <div ref={heroRef} className="pt-32 pb-16 px-6 max-w-7xl mx-auto">
         <div className="flex flex-col items-center">
@@ -68,11 +67,11 @@ const Contact = () => {
             ref={imageRef}
             className="md:flex md:flex-col md:justify-center w-full md:w-1/2"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700 md:mt-6 md:h-[460px] h-[300px]">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700 md:mt-6 md:h-[760px] h-[300px]">
               <img
                 src={contactImg}
                 alt="Business acceleration"
-                className="w-full h-full object-cover md:max-h-[400px]"
+                className="w-full h-full object-cover md:max-h-full"
               />
             </div>
           </div>
@@ -80,20 +79,16 @@ const Contact = () => {
           {/* Left Column - Form */}
           <div ref={formRef} className="w-full md:w-1/2">
             <div className="bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-slate-700 shadow-xl">
-              <h2 className="text-2xl font-bold mb-6 flex items-center">
-                <FiTrendingUp className="mr-2 text-blue-400" />
-                Let's Make It Happen
-              </h2>
 
               <form
                 action="https://formspree.io/f/mkgjnlkw"
                 method="POST"
-                className="space-y-6"
+                className="space-y-8"
               >
-                <div>
+                <div className="space-y-2">
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-slate-300 mb-1"
+                    className="block text-base font-medium text-slate-300"
                   >
                     Your name
                   </label>
@@ -102,14 +97,14 @@ const Contact = () => {
                     name="name"
                     id="name"
                     required
-                    className="w-full bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none"
+                    className="w-full p-4 bg-slate-900/60 border border-slate-700 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none"
                   />
                 </div>
 
-                <div>
+                <div className="space-y-2">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-slate-300 mb-1"
+                    className="block text-base font-medium text-slate-300"
                   >
                     Your email
                   </label>
@@ -118,14 +113,14 @@ const Contact = () => {
                     name="email"
                     id="email"
                     required
-                    className="w-full bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none"
+                    className="w-full p-4 bg-slate-900/60 border border-slate-700 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none"
                   />
                 </div>
 
-                <div>
+                <div className="space-y-2">
                   <label
                     htmlFor="need"
-                    className="block text-sm font-medium text-slate-300 mb-1"
+                    className="block text-base font-medium text-slate-300"
                   >
                     What service do you need?
                   </label>
@@ -133,7 +128,7 @@ const Contact = () => {
                     name="need"
                     id="need"
                     required
-                    className="w-full bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none"
+                    className="w-full p-4 bg-slate-900/60 border border-slate-700 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none"
                   >
                     <option value="">Select a service</option>
                     <option value="Landing page">Landing page</option>
@@ -145,12 +140,29 @@ const Contact = () => {
                   </select>
                 </div>
 
+                <div className="space-y-2">
+                  <label
+                    htmlFor="description"
+                    className="block text-base font-medium text-slate-300"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    name="description"
+                    id="description"
+                    required
+                    placeholder="Write Your goals and budget"
+                    className="w-full p-4 bg-slate-900/60 border border-slate-700 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none"
+                    rows={6}
+                  />
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center group transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-4 px-6 rounded-lg flex items-center justify-center group transition-all duration-300"
                 >
                   <span>Accelerate Your Growth</span>
-                  <MdArrowForward className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <MdArrowForward className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
               </form>
             </div>

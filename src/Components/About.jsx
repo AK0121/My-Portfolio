@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import Navbar from "./Navbar";
 import Lottie from "lottie-react";
 import rocketAnimation from "../assets/Animations/Animation-rocket-launch.json";
 import { BiSolidBinoculars } from "react-icons/bi";
@@ -8,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import visionImg from "/Assets/Images/vision.png";
 import AboutServices from "./AboutServices";
+import { HashLink } from "react-router-hash-link";
 
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -294,7 +294,6 @@ const About = () => {
 
   return (
     <div className="about-page w-full min-h-max lg:h-full overflow-hidden font-montserrat bg-gradient-to-br from-[#354961] to-[#061335]">
-      <Navbar />
 
       {/* Enhanced Hero Section */}
       <div ref={heroRef} className="about-hero-section relative md:h-[120vh]  min-h-max w-full overflow-hidden">
@@ -375,7 +374,8 @@ const About = () => {
               </div>
             </div>
 
-            <button 
+            <HashLink to="#servicesSection">
+            <div 
               ref={buttonRef}
               className="mt-8 relative overflow-hidden group bg-skyBlue text-white font-bold py-4 px-8 rounded-md text-lg parallax-2"
             >
@@ -384,7 +384,8 @@ const About = () => {
                 className="button-gradient absolute inset-0 bg-gradient-to-r from-skyBlue via-brightOrange to-skyBlue z-0"
                 style={{ transform: "translateX(-100%)" }}
               />
-            </button>
+            </div>
+            </HashLink>
           </div>
 
           <div 

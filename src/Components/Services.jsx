@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { PiUserSound } from "react-icons/pi";
 import { PiRocketLaunchThin } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 import sitePlanImg from "/Assets/Images/site-plan.svg";
 import siteDesignImg from "/Assets/Images/design-site.svg";
@@ -19,9 +20,7 @@ gsap.registerPlugin(useGSAP, scrollTrigger);
 const ServicesPage = () => {
   const canvasRef = useRef(null);
   const textRef = useRef([]);
-  const textRef2 = useRef([]);
   const servicesRef = useRef([]);
-  // const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -154,12 +153,6 @@ const ServicesPage = () => {
               We create wireframes, site maps, and user flows to bring your
               vision to life.
             </p>
-            {/* <button
-              className="text-brightOrange pt-5 font-bold transition-all duration-300 hover:text-skyBlue"
-              onClick={() => setShowContent(!showContent)}
-            >
-              {showContent ? "Read Less" : "Read More"}
-            </button> */}
           </div>
           {/* Service 2 */}
           <div className="p-6 bg-black/35 bg-opacity-80 rounded-lg border border-gray-800 shadow-2xl transform hover:scale-105 transition-transform duration-300">
@@ -184,7 +177,8 @@ const ServicesPage = () => {
             </p>
           </div>
         </div>
-        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group my-14 mx-auto">
+        <Link to="/contact">
+        <div className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-brightOrange text-white transition-all duration-200 ease-out group my-14 mx-auto">
           {/* Background overlay that expands on hover */}
           <span className="absolute inset-0 bg-skyBlue w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
@@ -197,7 +191,8 @@ const ServicesPage = () => {
             size={30}
             className="relative z-10 self-center transition-transform duration-300 ease-out group-hover:scale-75"
           />
-        </button>
+        </div>
+        </Link>
       </div>
 
       {/* Section 2: Facebook Ads & Digital Marketing */}
@@ -248,7 +243,8 @@ const ServicesPage = () => {
             </p>
           </div>
         </div>
-        <button className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-skyBlue text-white transition-all duration-200 ease-out group my-20 mx-auto">
+        <Link to="/contact">
+        <div className="relative overflow-hidden flex items-center justify-center gap-2 w-80 rounded-full px-4 py-4 text-lg font-montserrat font-semibold lg:font-bold outline-none bg-skyBlue text-white transition-all duration-200 ease-out group my-20 mx-auto">
           {/* Background overlay that expands on hover */}
           <span className="absolute inset-0 bg-brightOrange w-0 transition-all duration-300 ease-out group-hover:w-full"></span>
 
@@ -261,7 +257,8 @@ const ServicesPage = () => {
             size={20}
             className="relative z-10 self-center transition-transform duration-100 ease-out group-hover:scale-125"
           />
-        </button>
+        </div>
+        </Link>
       </div>
     </div>
   );

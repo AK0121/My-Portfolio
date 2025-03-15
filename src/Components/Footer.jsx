@@ -2,11 +2,10 @@ import React from "react";
 import globeImg from "/Assets/Images/globe.svg";
 import { IoCall } from "react-icons/io5";
 import { IoMdMail } from "react-icons/io";
-import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
-
   return (
     <div className="h-screen min-h-max w-full bg-[#000000] pt-10 pb-2 overflow-hidden">
       <div className="w-11/12 mx-auto max-w-7xl upper-section flex flex-col lg:flex-row md:flex-row items-center">
@@ -37,7 +36,9 @@ const Footer = () => {
           >
             <button className="flex items-center justify-center w-96 gap-3 p-3 rounded-md border-[1px]">
               <IoMdMail className="text-white text-lg md:text-xl" />
-              <span className="text-white text-lg">akcelerate.digital@gmail.com</span>
+              <span className="text-white text-lg">
+                akcelerate.digital@gmail.com
+              </span>
             </button>
           </a>
           <a
@@ -55,25 +56,24 @@ const Footer = () => {
             2025 &copy; Edition
           </h1>
           <div className="socials flex flex-col md:flex-row lg:flex-row gap-4 items-center justify-center md:justify-end">
-            
             <ul className="flex gap-6 items-center justify-center md:pr-4">
               <li>
-                <a href="">
-                  <FaWhatsapp size={30} color="white" />
+                <a href="https://www.instagram.com/akcelerate_official/" target="blank" rel="noopener noreferrer">
+                  <FaInstagram size={30} color="white" />
                 </a>
               </li>
               <li>
                 <a href="">
+                  <FaFacebook size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/akcelerateHQ" target="blank" rel="noopener noreferrer">
                   <FaXTwitter size={30} color="white" />
                 </a>
               </li>
               <li>
-                <a href="">
-                  <FaGithub size={30} color="white" />
-                </a>
-              </li>
-              <li>
-                <a href="">
+                <a href="https://www.linkedin.com/in/akcelerate-hq-77b526356/" target="blank" rel="noopener noreferrer">
                   <FaLinkedinIn size={30} color="white" />
                 </a>
               </li>
