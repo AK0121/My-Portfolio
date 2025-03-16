@@ -5,7 +5,6 @@ import Footer from "./Components/Footer";
 import About from "./Components/About";
 import HomePage from "./Components/HomePage";
 import Contact from "./Components/Contact";
-import ScrollToTop from "./Components/ScrollToTop";
 
 const App = () => {
   const location = useLocation();
@@ -13,15 +12,12 @@ const App = () => {
 
   return (
     <div
-      className="h-screen w-full overflow-y-auto"
+      className="min-h-screen w-full"
       style={{
         backgroundImage: "linear-gradient(to top, #000, #000019)",
       }}
     >
       <Navbar currentPath={currentPath} />
-      
-      {/* ScrollToTop should be outside of <Routes> */}
-      <ScrollToTop />  
 
       <Routes>
         <Route path="/" element={<HomePage />} />

@@ -5,6 +5,11 @@ import { MdArrowForward } from "react-icons/md";
 import { FaBolt } from "react-icons/fa";
 
 const Contact = () => {
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const heroRef = useRef(null);
   const formRef = useRef(null);
   const imageRef = useRef(null);
@@ -38,7 +43,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <div id="contact-form" className="w-full min-h-screen bg-[#03060D] font-montserrat text-white">
+    <div id="contact-form" className="w-full min-h-screen overflow-y-auto bg-[#03060D] font-montserrat text-white">
       {/* Hero Section with Dynamic Elements */}
       <div ref={heroRef} className="pt-32 pb-16 px-6 max-w-7xl mx-auto">
         <div className="flex flex-col items-center">

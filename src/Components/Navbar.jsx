@@ -105,7 +105,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="absolute z-[999] top-4 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[90%] lg:w-[80%] flex justify-between items-center bg-black/40 rounded-full border-[0.3px] border-gray-200/30 py-2 md:py-4 px-4 md:px-8">
+    <header className="fixed z-[999] top-4 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[90%] lg:w-[80%] flex justify-between items-center bg-black/40 rounded-full border-[0.3px] border-gray-200/30 py-2 md:py-4 px-4 md:px-8">
       {/* Logo */}
       <div className="logo relative overflow-hidden group">
         <img
