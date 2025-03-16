@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import logo from "/Assets/Images/logo-white-2.png";
 import { CiMenuFries } from "react-icons/ci";
 import { RiCloseLargeLine } from "react-icons/ri";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn, FaFacebook } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { FaXTwitter } from "react-icons/fa6";
 
 gsap.registerPlugin(useGSAP);
 
@@ -27,7 +28,6 @@ const Navbar = () => {
   }, [location]);
 
   const menuRef = useRef(null);
-  const videoRef = useRef(null);
   const overlayRef = useRef(null);
   const linksRef = useRef(null);
   const socialRef = useRef(null);
@@ -35,10 +35,6 @@ const Navbar = () => {
   // GSAP Animation for Mobile Menu
   useGSAP(() => {
     if (isOpen) {
-      if (videoRef.current) {
-        videoRef.current.currentTime = 0;
-        videoRef.current.play();
-      }
 
       const tl = gsap.timeline();
 
@@ -233,20 +229,30 @@ const Navbar = () => {
             </ul>
 
             {/* Social Media Icons */}
-            <div ref={socialRef} className="flex justify-center items-center gap-8 mb-12">
-              <a href="#" className="hover:scale-125 transition-transform duration-300">
-                <FaGithub size={28} className="text-white" />
-              </a>
-              <a href="#" className="hover:scale-125 transition-transform duration-300">
-                <FaLinkedin size={28} className="text-white" />
-              </a>
-              <a href="#" className="hover:scale-125 transition-transform duration-300">
-                <FaTwitter size={28} className="text-white" />
-              </a>
-              <a href="#" className="hover:scale-125 transition-transform duration-300">
-                <FaInstagram size={28} className="text-white" />
-              </a>
-            </div>
+            <div ref={socialRef} className="socials flex flex-col md:flex-row lg:flex-row gap-4 items-center justify-center md:justify-end">
+            <ul className="flex gap-6 items-center justify-center md:pr-4">
+              <li>
+                <a href="https://www.instagram.com/akcelerate_official/" target="blank" rel="noopener noreferrer">
+                  <FaInstagram size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <FaFacebook size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/akcelerateHQ" target="blank" rel="noopener noreferrer">
+                  <FaXTwitter size={30} color="white" />
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/akcelerate-hq-77b526356/" target="blank" rel="noopener noreferrer">
+                  <FaLinkedinIn size={30} color="white" />
+                </a>
+              </li>
+            </ul>
+          </div>
           </div>
         </div>
       </nav>
