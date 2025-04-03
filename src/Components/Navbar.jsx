@@ -35,7 +35,6 @@ const Navbar = () => {
   // GSAP Animation for Mobile Menu
   useGSAP(() => {
     if (isOpen) {
-
       const tl = gsap.timeline();
 
       // Animate the full-screen menu sliding in from left
@@ -53,9 +52,9 @@ const Navbar = () => {
       tl.fromTo(
         ".grid-background",
         { opacity: 0 },
-        { 
+        {
           opacity: 0.15,
-          duration: 0.3
+          duration: 0.3,
         },
         "-=0.3"
       );
@@ -152,7 +151,12 @@ const Navbar = () => {
         >
           {/* Clean Grid SVG Background */}
           <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-            <svg className="grid-background w-full h-full opacity-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <svg
+              className="grid-background w-full h-full opacity-0"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
               {/* Perspective Grid Lines */}
               {/* Horizontal lines */}
               {Array.from({ length: 12 }).map((_, i) => (
@@ -178,20 +182,53 @@ const Navbar = () => {
                   strokeWidth="0.15"
                 />
               ))}
-              
+
               {/* Diagonal accent lines (only a few, positioned mostly at edges) */}
-              <line x1="0" y1="100" x2="100" y2="0" stroke="url(#accent-gradient)" strokeWidth="0.2" />
-              <line x1="0" y1="50" x2="50" y2="0" stroke="url(#accent-gradient)" strokeWidth="0.2" />
-              <line x1="50" y1="100" x2="100" y2="50" stroke="url(#accent-gradient)" strokeWidth="0.2" />
-              
+              <line
+                x1="0"
+                y1="100"
+                x2="100"
+                y2="0"
+                stroke="url(#accent-gradient)"
+                strokeWidth="0.2"
+              />
+              <line
+                x1="0"
+                y1="50"
+                x2="50"
+                y2="0"
+                stroke="url(#accent-gradient)"
+                strokeWidth="0.2"
+              />
+              <line
+                x1="50"
+                y1="100"
+                x2="100"
+                y2="50"
+                stroke="url(#accent-gradient)"
+                strokeWidth="0.2"
+              />
+
               {/* Gradients definitions */}
               <defs>
-                <linearGradient id="grid-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <linearGradient
+                  id="grid-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
                   <stop offset="0%" stopColor="#4299e1" stopOpacity="0.1" />
                   <stop offset="50%" stopColor="#4299e1" stopOpacity="0.3" />
                   <stop offset="100%" stopColor="#4299e1" stopOpacity="0.1" />
                 </linearGradient>
-                <linearGradient id="accent-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <linearGradient
+                  id="accent-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
                   <stop offset="0%" stopColor="#00e1ff" stopOpacity="0.1" />
                   <stop offset="50%" stopColor="#00e1ff" stopOpacity="0.4" />
                   <stop offset="100%" stopColor="#00e1ff" stopOpacity="0.1" />
@@ -211,7 +248,10 @@ const Navbar = () => {
             </button>
 
             {/* Navigation Links */}
-            <ul ref={linksRef} className="flex flex-col items-center justify-center gap-12 mt-24">
+            <ul
+              ref={linksRef}
+              className="flex flex-col items-center justify-center gap-12 mt-24"
+            >
               {menuItems.map((item) => (
                 <li key={item.name} className="text-center">
                   <Link
@@ -229,30 +269,49 @@ const Navbar = () => {
             </ul>
 
             {/* Social Media Icons */}
-            <div ref={socialRef} className="socials flex flex-col md:flex-row lg:flex-row gap-4 items-center justify-center md:justify-end">
-            <ul className="flex gap-6 items-center justify-center md:pr-4">
-              <li>
-                <a href="https://www.instagram.com/akcelerate_official/" target="blank" rel="noopener noreferrer">
-                  <FaInstagram size={30} color="white" />
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  <FaFacebook size={30} color="white" />
-                </a>
-              </li>
-              <li>
-                <a href="https://x.com/akcelerateHQ" target="blank" rel="noopener noreferrer">
-                  <FaXTwitter size={30} color="white" />
-                </a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/in/akcelerate-hq-77b526356/" target="blank" rel="noopener noreferrer">
-                  <FaLinkedinIn size={30} color="white" />
-                </a>
-              </li>
-            </ul>
-          </div>
+            <div
+              ref={socialRef}
+              className="socials flex flex-col md:flex-row lg:flex-row gap-4 items-center justify-center md:justify-end"
+            >
+              <ul className="flex gap-6 items-center justify-center md:pr-4">
+                <li>
+                  <a
+                    href="https://www.instagram.com/akcelerate_official/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaInstagram size={30} color="white" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61574428815483"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaFacebook size={30} color="white" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://x.com/akcelerateHQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaXTwitter size={30} color="white" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/akcelerate-hq-77b526356/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedinIn size={30} color="white" />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>

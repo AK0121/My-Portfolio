@@ -58,22 +58,38 @@ const Footer = () => {
           <div className="socials flex flex-col md:flex-row lg:flex-row gap-4 items-center justify-center md:justify-end">
             <ul className="flex gap-6 items-center justify-center md:pr-4">
               <li>
-                <a href="https://www.instagram.com/akcelerate_official/" target="blank" rel="noopener noreferrer">
+                <a
+                  href="https://www.instagram.com/akcelerate_official/"
+                  target="blank"
+                  rel="noopener noreferrer"
+                >
                   <FaInstagram size={30} color="white" />
                 </a>
               </li>
               <li>
-                <a href="">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61574428815483"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaFacebook size={30} color="white" />
                 </a>
               </li>
               <li>
-                <a href="https://x.com/akcelerateHQ" target="blank" rel="noopener noreferrer">
+                <a
+                  href="https://x.com/akcelerateHQ"
+                  target="blank"
+                  rel="noopener noreferrer"
+                >
                   <FaXTwitter size={30} color="white" />
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/in/akcelerate-hq-77b526356/" target="blank" rel="noopener noreferrer">
+                <a
+                  href="https://www.linkedin.com/in/akcelerate-hq-77b526356/"
+                  target="blank"
+                  rel="noopener noreferrer"
+                >
                   <FaLinkedinIn size={30} color="white" />
                 </a>
               </li>
